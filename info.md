@@ -71,4 +71,17 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 5.0.0
 
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.0
 
+# dotnet build
 
+Microsoft (R) Build Engine version 16.11.2+f32259642 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  PlatformService -> D:\src\LesJackson\lesjackson-microservices\PlatformService\bin\Debug\net5.0\PlatformService.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.48
