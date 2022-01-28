@@ -17,3 +17,5 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 5.0.0
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.0
 
 dotnet build
+
+
