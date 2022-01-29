@@ -18,4 +18,4 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.0
 
 dotnet build
 
-
+dotnet run

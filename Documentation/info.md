@@ -85,3 +85,21 @@ Build succeeded.
     0 Error(s)
 
 Time Elapsed 00:00:03.48
+
+
+# dotnet run
+
+Building...
+
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: https://localhost:5001
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://localhost:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\src\LesJackson\lesjackson-microservices\PlatformService
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
