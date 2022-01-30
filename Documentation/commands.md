@@ -19,3 +19,24 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.0
 dotnet build
 
 dotnet run
+
+
+build image:
+
+docker build -t dpoluektov/platformservice .
+
+run image as a container
+
+docker run -p 8080:80 -d dpoluektov/platformservice
+
+docker ps
+
+docker stop b766a603c0fd
+
+docker ps
+
+docker run -p 8080:80 -d dpoluektov/platformservice
+docker stop 36250effbb80
+ - different container 
+
+docker start b766a603c0fd

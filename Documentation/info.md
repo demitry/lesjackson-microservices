@@ -114,3 +114,153 @@ choco install curl
 curl --request GET \
   --url http://localhost:5000/api/platforms
 
+# git alias
+cd ~
+~/.gitconfig
+add
+
+[alias]
+    lg = lg1
+    lg1 = lg1-specific --all
+    lg2 = lg2-specific --all
+    lg3 = lg3-specific --all
+
+    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+
+# Docker
+Package and Deploy
+Dockerfile -> Docker Engine -> Docker Image
+Push image to Docker Hub
+
+# docker --version
+
+Docker version 20.10.8, build 3967b7d
+
+https://dotnetplaybook.com/
+Cheat Sheets
+
+
+# docker build -t dpoluektov/platformservice .
+
+[+] Building 69.6s (7/14)
+ => => sha256:ca2e100d2c30490f7cb34ab737bc33e9bd7e533446f6c3356c082caccae7be1a 2.17kB / 2.17kB                          0.0s 
+ => => sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a 27.15MB / 27.15MB                       27.3s 
+ => => sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9 17.07MB / 17.07MB                       15.1s 
+ => => sha256:5ee3cfc68efbb96e58657eb91f2969f6ba7ce2f8d099d711722eb9a7c480754e 31.77MB / 31.77MB                       21.4s 
+ => => sha256:56c157384aef1ad8f078770b8efb754e9fe3fd2b0eceb215e0c14f753f286a66 156B / 156B                             15.3s 
+ => => sha256:b5cdec11a1c3039c828687eceeafdb42b9732a9f205ea147dde498110c698d2c 8.65MB / 8.65MB                         24.4s 
+ => => extracting sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a                               2.0s 
+ => => extracting sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9                               0.8s 
+[+] Building 69.7s (7/14)
+ => => sha256:ca2e100d2c30490f7cb34ab737bc33e9bd7e533446f6c3356c082caccae7be1a 2.17kB / 2.17kB                          0.0s 
+ => => sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a 27.15MB / 27.15MB                       27.3s 
+ => => sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9 17.07MB / 17.07MB                       15.1s 
+ => => sha256:5ee3cfc68efbb96e58657eb91f2969f6ba7ce2f8d099d711722eb9a7c480754e 31.77MB / 31.77MB                       21.4s 
+ => => sha256:56c157384aef1ad8f078770b8efb754e9fe3fd2b0eceb215e0c14f753f286a66 156B / 156B                             15.3s 
+ => => sha256:b5cdec11a1c3039c828687eceeafdb42b9732a9f205ea147dde498110c698d2c 8.65MB / 8.65MB                         24.4s 
+ => => extracting sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a                               2.0s 
+ => => extracting sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9                               0.8s 
+[+] Building 69.8s (7/14)
+ => => extracting sha256:56c157384aef1ad8f078770b8efb754e9fe3fd2b0eceb215e0c14f753f286a66                               0.0s 
+ => => extracting sha256:b5cdec11a1c3039c828687eceeafdb42b9732a9f205ea147dde498110c698d2c                               0.4s 
+ => [build-env 1/6] FROM mcr.microsoft.com/dotnet/sdk:5.0@sha256:3ca1a372ff025d1f84bb2bef7dbb7c284ea3b49e00bcd0047336  67.7s 
+ => => resolve mcr.microsoft.com/dotnet/sdk:5.0@sha256:3ca1a372ff025d1f84bb2bef7dbb7c284ea3b49e00bcd0047336b9bca9f8dfb  0.0s 
+ => => sha256:3ca1a372ff025d1f84bb2bef7dbb7c284ea3b49e00bcd0047336b9bca9f8dfb7 2.17kB / 2.17kB                          0.0s 
+ => => sha256:75ff3ad3a567482d7403eeeef5424fac254c5931a57992e07c2513204168c1a4 2.01kB / 2.01kB                          0.0s 
+ => => sha256:e70f11cab56689a1067afe87cdd86e939f5459cdb4e685be4f8e1f4fc3a91687 7.11kB / 7.11kB                          0.0s 
+ => => sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a 27.15MB / 27.15MB                       27.2s 
+[+] Building 129.6s (15/15) FINISHED
+ => [internal] load build definition from Dockerfile                                                                    0.0s 
+ => => transferring dockerfile: 336B                                                                                    0.0s 
+ => [internal] load .dockerignore                                                                                       0.0s 
+ => => transferring context: 2B                                                                                         0.0s 
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:5.0                                                    2.0s 
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:5.0                                                       1.9s 
+ => [internal] load build context                                                                                       1.6s 
+ => => transferring context: 20.78MB                                                                                    1.6s 
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:5.0@sha256:ca2e100d2c30490f7cb34ab737bc33e9bd7e533446f6c3356c0  32.9s 
+ => => resolve mcr.microsoft.com/dotnet/aspnet:5.0@sha256:ca2e100d2c30490f7cb34ab737bc33e9bd7e533446f6c3356c082caccae7  0.0s 
+ => => sha256:8906b71923faf4e187741d45edf43c56ba19321f911fb914f745cc056c1c75f4 1.37kB / 1.37kB                          0.0s 
+ => => sha256:3aaf45867ca644caef3ac6735335506c4c260c5e82c4c355e04f5864730c12e6 3.27kB / 3.27kB                          0.0s 
+ => => sha256:ca2e100d2c30490f7cb34ab737bc33e9bd7e533446f6c3356c082caccae7be1a 2.17kB / 2.17kB                          0.0s 
+ => => sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a 27.15MB / 27.15MB                       27.3s 
+ => => sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9 17.07MB / 17.07MB                       15.1s 
+ => => sha256:5ee3cfc68efbb96e58657eb91f2969f6ba7ce2f8d099d711722eb9a7c480754e 31.77MB / 31.77MB                       21.4s 
+ => => sha256:56c157384aef1ad8f078770b8efb754e9fe3fd2b0eceb215e0c14f753f286a66 156B / 156B                             15.3s 
+ => => sha256:b5cdec11a1c3039c828687eceeafdb42b9732a9f205ea147dde498110c698d2c 8.65MB / 8.65MB                         24.4s 
+ => => extracting sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a                               2.0s 
+ => => extracting sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9                               0.8s 
+ => => extracting sha256:5ee3cfc68efbb96e58657eb91f2969f6ba7ce2f8d099d711722eb9a7c480754e                               1.5s 
+ => => extracting sha256:56c157384aef1ad8f078770b8efb754e9fe3fd2b0eceb215e0c14f753f286a66                               0.0s 
+ => => extracting sha256:b5cdec11a1c3039c828687eceeafdb42b9732a9f205ea147dde498110c698d2c                               0.4s 
+ => [build-env 1/6] FROM mcr.microsoft.com/dotnet/sdk:5.0@sha256:3ca1a372ff025d1f84bb2bef7dbb7c284ea3b49e00bcd0047336  92.4s 
+ => => resolve mcr.microsoft.com/dotnet/sdk:5.0@sha256:3ca1a372ff025d1f84bb2bef7dbb7c284ea3b49e00bcd0047336b9bca9f8dfb  0.0s 
+ => => sha256:3ca1a372ff025d1f84bb2bef7dbb7c284ea3b49e00bcd0047336b9bca9f8dfb7 2.17kB / 2.17kB                          0.0s 
+ => => sha256:75ff3ad3a567482d7403eeeef5424fac254c5931a57992e07c2513204168c1a4 2.01kB / 2.01kB                          0.0s 
+ => => sha256:e70f11cab56689a1067afe87cdd86e939f5459cdb4e685be4f8e1f4fc3a91687 7.11kB / 7.11kB                          0.0s 
+ => => sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a 27.15MB / 27.15MB                       27.2s 
+ => => sha256:5ee3cfc68efbb96e58657eb91f2969f6ba7ce2f8d099d711722eb9a7c480754e 31.77MB / 31.77MB                       21.4s 
+ => => sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9 17.07MB / 17.07MB                       15.1s 
+ => => sha256:56c157384aef1ad8f078770b8efb754e9fe3fd2b0eceb215e0c14f753f286a66 156B / 156B                             15.3s 
+ => => sha256:b5cdec11a1c3039c828687eceeafdb42b9732a9f205ea147dde498110c698d2c 8.65MB / 8.65MB                         24.4s 
+ => => sha256:b2bd1b9bce4fe8e98abd1eeaee5434e485160be60eaa9c0cff77cddaefd7e5f0 27.56MB / 27.56MB                       39.2s 
+ => => sha256:c2ff04abc29ceae5157967794c0f78796e17affc4aadc636c8de883fa57f76ea 105.57MB / 105.57MB                     85.1s 
+ => => sha256:abeb2bf5ca3eda9c027a91f82e537b9503be2303b197eecb90ed1ba4fc383e99 12.69MB / 12.69MB                       39.1s 
+ => => extracting sha256:6552179c3509e3c4314b4065e0d2790563d01cd474e2fdd58be4d46acd48af6a                             100.1s 
+ => => extracting sha256:0d6abc3048f0c2d58f135ff64df2e446d1020a8cb6a8f022abdb3dcf592be7b9                              97.9s 
+ => => extracting sha256:5ee3cfc68efbb96e58657eb91f2969f6ba7ce2f8d099d711722eb9a7c480754e                               1.5s 
+ => => extracting sha256:56c157384aef1ad8f078770b8efb754e9fe3fd2b0eceb215e0c14f753f286a66                              95.4s 
+ => => extracting sha256:b2bd1b9bce4fe8e98abd1eeaee5434e485160be60eaa9c0cff77cddaefd7e5f0                               1.4s 
+ => => extracting sha256:c2ff04abc29ceae5157967794c0f78796e17affc4aadc636c8de883fa57f76ea                               4.7s 
+ => => extracting sha256:abeb2bf5ca3eda9c027a91f82e537b9503be2303b197eecb90ed1ba4fc383e99                               0.6s 
+ => [stage-1 2/3] WORKDIR /app                                                                                          2.3s 
+ => [build-env 2/6] WORKDIR /app                                                                                        1.0s 
+ => [build-env 3/6] COPY *.csproj ./                                                                                    0.1s 
+ => [build-env 4/6] RUN dotnet restore                                                                                 28.5s 
+ => [build-env 5/6] COPY . ./                                                                                           0.2s 
+ => [build-env 6/6] RUN dotnet publish -c Release -o out                                                                4.9s 
+ => [stage-1 3/3] COPY --from=build-env /app/out .                                                                      0.2s 
+ => exporting to image                                                                                                  0.2s 
+ => => exporting layers                                                                                                 0.2s 
+ => => writing image sha256:a353df9828ababb4700654bd6e7c6636cf2f22e36802281143785a873bf9ffb6                            0.0s 
+ => => naming to docker.io/dpoluektov/platformservice                                                                   0.0s 
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+# docker run -p 8080:80 -d dpoluektov/platformservice
+
+b766a603c0fdcaca933403dcd994726a00aaa8bb95026b3926757e0a757aff96
+
+# docker ps
+
+CONTAINER ID   IMAGE                        COMMAND                  CREATED              STATUS              PORTS                  NAMES    
+       NAMES                                                                                                                   tcp   wonderful
+b766a603c0fd   dpoluektov/platformservice   "dotnet PlatformServ…"   About a minute ago   Up About a minute   0.0.0.0:8080->80//tcp   wonderful_chaplygin
+
+# docker stop b766a603c0fd
+
+b766a603c0fd
+# docker ps
+
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+# run different container
+PS D:\src\LesJackson\lesjackson-microservices\PlatformService> docker run -p 8080:80 -d dpoluektov/platformservice
+
+36250effbb8032ec5617de69a91a1a039cc80e96f8afd042933e2cd3e230ec8b
+PS D:\src\LesJackson\lesjackson-microservices\PlatformService> docker ps
+
+CONTAINER ID   IMAGE                        COMMAND                  CREATED         STATUS         PORTS                  NAMES
+36250effbb80   dpoluektov/platformservice   "dotnet PlatformServ…"   5 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp   pedantic_knuth
+PS D:\src\LesJackson\lesjackson-microservices\PlatformService> 
+
+PS D:\src\LesJackson\lesjackson-microservices\PlatformService> docker stop 36250effbb80
+
+36250effbb80
+PS D:\src\LesJackson\lesjackson-microservices\PlatformService> docker ps
+
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+# Run previous one 
+docker start b766a603c0fd
