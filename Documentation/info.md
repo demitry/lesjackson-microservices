@@ -103,3 +103,14 @@ info: Microsoft.Hosting.Lifetime[0]
       Content root path: D:\src\LesJackson\lesjackson-microservices\PlatformService
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
+
+
+# https://insomnia.rest/
+Error: SSL peer certificate or SSH remote key was not OK
+Settings -> General -> Request/Response -> uncheck "Validate Sertificate"
+
+choco install curl
+
+curl --request GET \
+  --url http://localhost:5000/api/platforms
+
