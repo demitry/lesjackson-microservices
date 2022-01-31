@@ -20,6 +20,7 @@ dotnet build
 
 dotnet run
 
+### Docker
 
 build image:
 
@@ -40,3 +41,18 @@ docker stop 36250effbb80
  - different container 
 
 docker start b766a603c0fd
+
+docker push dpoluektov/platformservice
+
+### Kubernetes
+
+kubectl version
+
+kubectl apply -f platforms-depl.yaml  
+
+kubectl get deployments
+
+kubectl get pods
+
+kubectl delete deployment platforms-depl
+

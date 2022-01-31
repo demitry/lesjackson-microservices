@@ -264,3 +264,61 @@ PS D:\src\LesJackson\lesjackson-microservices\PlatformService> docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 # Run previous one 
 docker start b766a603c0fd
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+
+
+# docker push dpoluektov/platformservice
+
+Using default tag: latest
+The push refers to repository [docker.io/dpoluektov/platformservice]
+2dfab6a4d13e: Pushed
+d5f5ebe55499: Pushed
+41ca5b4feaf4: Pushed
+4c1e7b065141: Pushed
+5b1283bfec8a: Pushed
+de5bcf849824: Pushed
+f18b02b14138: Pushed
+latest: digest: sha256:8016808f6a4a4b18d726c9575362f8d8dfa5d0298fb72b956a43dd2abc8ac7c3 size: 1789
+
+# Kubernetes
+kubectl version
+
+Client Version: version.Info{Major:"1", Minor:"22", GitVersion:"v1.22.5", GitCommit:"5c99e2ac2ff9a3c549d9ca665e7bc05a3e18f07e", GitTreeState:"clean", BuildDate:"2021-12-16T08:38:33Z", GoVersion:"go1.16.12", Compiler:"gc", Platform:"windows/amd64"}
+Server Version: version.Info{Major:"1", Minor:"22", GitVersion:"v1.22.5", GitCommit:"5c99e2ac2ff9a3c549d9ca665e7bc05a3e18f07e", GitTreeState:"clean", BuildDate:"2021-12-16T08:32:32Z", GoVersion:"go1.16.12", Compiler:"gc", Platform:"linux/amd64"}
+
+# kubectl apply -f platforms-depl.yaml  
+deployment.apps/platforms-depl created
+
+# kubectl get deployments
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE 
+platforms-depl   1/1     1            1           2m3s
+
+# kubectl get pods
+NAME                              READY   STATUS    RESTARTS   AGE  
+platforms-depl-74c484b8cf-m7qbq   1/1     Running   0          3m31s
+
+
+spec:
+  replicas: 1
+=> контейнер постоянно поднимается кубом при остановке и удалении
+
+# kubectl delete deployment platforms-depl
+deployment.apps "platforms-depl" deleted
+
+# kubectl get deployments
+No resources found in default namespace.
+
+spec:
+  replicas: 3
+
+# kubectl apply -f platforms-depl.yaml    
+deployment.apps/platforms-depl created
+# kubectl get pods
+NAME                              READY   STATUS    RESTARTS   AGE
+platforms-depl-74c484b8cf-6vmrx   1/1     Running   0          14s
+platforms-depl-74c484b8cf-klk24   1/1     Running   0          14s
+platforms-depl-74c484b8cf-zv8m5   1/1     Running   0          14s
+
+# Nodes - get access
+Node port - external access to our pod
