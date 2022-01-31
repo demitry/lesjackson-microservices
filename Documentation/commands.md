@@ -56,3 +56,7 @@ kubectl get pods
 
 kubectl delete deployment platforms-depl
 
+
+kubectl apply -f platforms-np-srv.yaml
+
+kubectl get services

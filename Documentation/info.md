@@ -322,3 +322,14 @@ platforms-depl-74c484b8cf-zv8m5   1/1     Running   0          14s
 
 # Nodes - get access
 Node port - external access to our pod
+
+# kubectl apply -f platforms-np-srv.yaml
+service/platformservice-srv created
+
+# kubectl get services
+NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes            ClusterIP   10.96.0.1       <none>        443/TCP        28h
+platformservice-srv   NodePort    10.100.201.25   <none>        80:31449/TCP   2m11s
+
+31449 port - we have to use to use service externally
+ 
