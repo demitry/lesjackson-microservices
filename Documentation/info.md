@@ -332,4 +332,14 @@ kubernetes            ClusterIP   10.96.0.1       <none>        443/TCP        2
 platformservice-srv   NodePort    10.100.201.25   <none>        80:31449/TCP   2m11s
 
 31449 port - we have to use to use service externally
- 
+
+# dotnet new webapi -n CommandsService
+The template "ASP.NET Core Web API" was created successfully.
+
+Processing post-creation actions...
+Running 'dotnet restore' on CommandsService\CommandsService.csproj...
+  Determining projects to restore...
+  Restored D:\src\LesJackson\lesjackson-microservices\CommandsService\CommandsService.csproj (in 230 ms).
+Restore succeeded.
+
+
