@@ -60,3 +60,11 @@ kubectl delete deployment platforms-depl
 kubectl apply -f platforms-np-srv.yaml
 
 kubectl get services
+
+# Commands Service 
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+dotnet add package Microsoft.EntityFrameworkCore --version 5.0.0
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.0
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+
+dotnet new gitignore
