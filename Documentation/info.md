@@ -343,3 +343,16 @@ Running 'dotnet restore' on CommandsService\CommandsService.csproj...
 Restore succeeded.
 
 
+# Commands Service 
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+dotnet add package Microsoft.EntityFrameworkCore --version 5.0.0
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.0
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+
+dotnet new gitignore
+
+# Two Services talking to each other synchrouniusly using HTTP
+Synchronous HTTP Communication
+
+Platform resource is dependent on Command Resource
+So we have 2 controllers

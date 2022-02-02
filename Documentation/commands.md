@@ -68,3 +68,5 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.0
 dotnet add package Microsoft.EntityFrameworkCore.InMemory
 
 dotnet new gitignore
+
+code -r CommandsService
