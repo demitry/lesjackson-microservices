@@ -16,3 +16,11 @@ PlatformCreateDto
 
 We will use Automapper to map.
 
+### Synchronous Messaging
+* Request/Response Cycle
+* Requester will "wait" for response
+* Externally facing services usually synchronous (http requests)
+* Synchronous Services usually need to "know" about each other
+* 2 forms:
+    * Http
+    * Grpc
