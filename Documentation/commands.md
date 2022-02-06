@@ -70,3 +70,11 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory
 dotnet new gitignore
 
 code -r CommandsService
+
+## Commands Service -> Kube
+
+docker build -t dpoluektov/commandsservice .
+
+docker push dpoluektov/commandsservice
+
+docker run -p 8080:80 -d dpoluektov/commandsservice
