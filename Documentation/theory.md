@@ -48,3 +48,35 @@ A: **No!**
     - the requestor still has to wait
     - the call is synchronous
 
+### The SSL connection could not be established
+#### The remote certificate is invalid because of errors in the certificate chain: UntrustedRoot
+
+//TODO: got exception: "The SSL connection could not be established, see inner exception"
+--> Could NOT send synchronously: The SSL connection could not be established, see inner exception.
+Could NOT send synchronously: The SSL connection could not be established, see inner exception.: The remote certificate is invalid because of errors in the certificate chain: UntrustedRoot
+
+The .NET gRPC client requires the service to have a trusted certificate.
+
+If you are testing your app locally and the ASP.NET Core HTTPS development certificate is not trusted. For instructions to fix this issue, you should trust the develop certificate as this article shows.
+
+If you are calling a gRPC service on another machine and are unable to trust the certificate then the gRPC client can be configured to ignore the invalid certificate. The following code uses HttpClientHandler.ServerCertificateCustomValidationCallback to allow calls without a trusted certificate:
+
+ var httpHandler = new HttpClientHandler();
+ // Return `true` to allow certificates that are untrusted/invalid
+ httpHandler.ServerCertificateCustomValidationCallback = 
+     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+    
+ var channel = GrpcChannel.ForAddress("https://localhost:5001",
+     new GrpcChannelOptions { HttpHandler = httpHandler });
+ var client = new Greet.GreeterClient(channel);
+
+
+Notice: Untrusted certificates should only be used during app development. Production apps should always use valid certificates.
+...
+ServicePointManager.ServerCertificateValidationCallback += (o, c, ch, er) => true;
+But this means that you will trust all certificates. For a service that isn't just run locally, something a bit smarter will be needed. In the first instance you could use this code to just test whether it solves your problem.
+
+
+### Run PowerShell ps1
+Got an 'unexpected token' error while running ps1 script?
+This particular problem vanished after **changing the encoding of the PS1 file from UTF-8 to UTF-8-BOM.**

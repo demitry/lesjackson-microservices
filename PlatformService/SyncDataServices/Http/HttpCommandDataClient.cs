@@ -18,7 +18,7 @@ namespace PlatformService.SyncDataServices.Http
             _httpClient = httpClient;
             _configuration = configuration;
         }
-        
+
         public async Task SendPlatformToCommand(PlatformReadDto plat)
         {
             var httpContent = new StringContent(
@@ -27,10 +27,9 @@ namespace PlatformService.SyncDataServices.Http
                 "application/json"
             );
 
-            var response = await _httpClient.PostAsync(
-                $"{_configuration["commandService"]}", httpContent);
-                //"http://localhost:6000/api/c/platforms/", 
-                // was hardcoded, got from the config
+            var response = await _httpClient.PostAsync($"{_configuration["CommandService"]}", httpContent);
+            //"http://localhost:6000/api/c/platforms/", 
+            // was hardcoded, got from the config
 
             if(response.IsSuccessStatusCode)
             {

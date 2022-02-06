@@ -69,8 +69,7 @@ namespace PlatformService.Controllers
             }
             catch (Exception ex)
             {   
-                Console.WriteLine($"--> Could NOT send synchronously: {ex.Message}");
-                //TODO: got exception: "The SSL connection could not be established, see inner exception"
+                Console.WriteLine($"--> Could NOT send synchronously: {ex.Message}: {ex.InnerException.Message}");
             }
 
             return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id}, platformReadDto);
