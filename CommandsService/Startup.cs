@@ -44,7 +44,8 @@ namespace CommandsService
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CommandsService v1"));
             }
 
-            app.UseHttpsRedirection();
+            //TODO: Enable on PROD!
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
