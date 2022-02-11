@@ -579,3 +579,87 @@ Command Service
 
 Fantastic!
 
+https://youtu.be/DgVjEo3OGBI?t=17072
+
+4:44:55 Adding an API Gateway
+Adding an API Gateway with Ingress nginx 
+# Install Ingress nginx 
+
+https://kubernetes.github.io/ingress-nginx/deploy/
+
+Different providers
+Check yaml file:
+https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/aws/deploy.yaml
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/aws/deploy.yaml
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/aws/deploy.yaml
+namespace/ingress-nginx created
+serviceaccount/ingress-nginx created
+configmap/ingress-nginx-controller created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx created
+role.rbac.authorization.k8s.io/ingress-nginx created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx created
+service/ingress-nginx-controller-admission created
+service/ingress-nginx-controller created
+deployment.apps/ingress-nginx-controller created
+ingressclass.networking.k8s.io/nginx created
+validatingwebhookconfiguration.admissionregistration.k8s.io/ingress-nginx-admission created
+serviceaccount/ingress-nginx-admission created
+clusterrole.rbac.authorization.k8s.io/ingress-nginx-admission created
+clusterrolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+role.rbac.authorization.k8s.io/ingress-nginx-admission created
+rolebinding.rbac.authorization.k8s.io/ingress-nginx-admission created
+job.batch/ingress-nginx-admission-create created
+job.batch/ingress-nginx-admission-patch created
+
+kubectl get deployments 
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE  
+commands-depl    1/1     1            1           3d23h
+platforms-depl   1/1     1            1           10d  
+
+kubectl get pods       
+NAME                              READY   STATUS    RESTARTS      AGE  
+commands-depl-7b9447fbb8-kdvtb    1/1     Running   1 (23h ago)   3d23h
+platforms-depl-5b69dbc478-s7scc   1/1     Running   1 (23h ago)   3d23h
+
+Q: ??? Empty
+A: kube namespaces!
+
+We are working in our project **default** namespace
+
+## kubectl get namespace
+NAME              STATUS   AGE
+**default**           Active   11d
+ingress-nginx     Active   3m22s
+kube-node-lease   Active   11d
+kube-public       Active   11d
+kube-system       Active   11d
+
+## kubectl get pods --namespace=ingress-nginx
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create--1-sws7r     0/1     Completed   0          5m7s
+ingress-nginx-admission-patch--1-55mmb      0/1     Completed   1          5m7s
+ingress-nginx-controller-54d8b558d4-kv9v5   1/1     Running     0          5m7s
+
+## kubectl get services --namespace=ingress-nginx
+NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+ingress-nginx-controller             LoadBalancer   10.108.135.173   localhost     80:30995/TCP,443:31393/TCP   8m9s        
+ingress-nginx-controller-admission   ClusterIP      10.106.193.62    <none>        443/TCP                      8m10s   
+
+## Create the config file to route our services
+
+yaml
+
+add to hosts
+win ( C:\Windows\System32\drivers\etc )
+127.0.0.1 acme.com 
+
+kubectl apply -f ingress-srv.yaml  
+ingress.networking.k8s.io/ingress-srv created
+
+GET http://acme.com/api/platforms
+
+Fantastic!
+
