@@ -663,3 +663,297 @@ GET http://acme.com/api/platforms
 
 Fantastic!
 
+### Storage
+ - 1) Persistent Volume Claim
+ - 2) Persistent Volume
+ - 3) Storage Class
+
+kubectl get storageclass
+NAME                 PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+hostpath (default)   docker.io/hostpath   Delete          Immediate           false                  11d
+
+
+We have to create a Persistent Volume Claim
+Will use persistent defaults, storage slass
+
+local-pvc.yaml
+
+pvc means Persistent Volume Claim
+
+kubectl apply -f local-pvc.yaml 
+persistentvolumeclaim/mssql-claim created
+
+kubectl get pvc
+NAME          STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mssql-claim   Bound    pvc-a3862333-b255-4d48-a955-0b49b6b02bdc   200Mi      RWX            hostpath       48s
+
+
+get storageclass        
+NAME                 PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+hostpath (default)   docker.io/hostpath   Delete          Immediate           false                  11d
+
+
+SQL Server will require system admin password
+
+Saving password in config - bad idea
+create secret
+
+kubectl create secret generic mssql --from-literal=SA_PASSWORD="Pa55w0rd!"
+secret/mssql created
+
+Create deployment for sql server
+
+kubectl apply -f mssql-plat-depl.yaml
+deployment.apps/mssql-depl created
+service/mssql-clusterip-srv created
+service/mssql-loadbalancer created
+
+kubectl get services
+NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE 
+commands-clusterip-srv    ClusterIP      10.108.158.183   <none>        80/TCP           4d8h
+kubernetes                ClusterIP      10.96.0.1        <none>        443/TCP          11d 
+mssql-clusterip-srv       ClusterIP      10.104.32.199    <none>        1433/TCP         25s 
+mssql-loadbalancer        LoadBalancer   10.111.112.111   localhost     1433:30457/TCP   25s
+platforms-clusterip-srv   ClusterIP      10.98.191.115    <none>        80/TCP           4d8h
+platformservice-srv       NodePort       10.100.201.25    <none>        80:31449/TCP     10d
+
+
+kubectl get pods
+NAME                              READY   STATUS              RESTARTS      AGE
+commands-depl-7b9447fbb8-kdvtb    1/1     Running             1 (32h ago)   4d8h
+mssql-depl-856b8c48fd-l2p6h       0/1     ContainerCreating   0             50s
+platforms-depl-5b69dbc478-s7scc   1/1     Running             1 (32h ago)   4d8h
+
+wait for mssql-depl
+
+kubectl get pods
+NAME                              READY   STATUS             RESTARTS      AGE
+commands-depl-7b9447fbb8-kdvtb    1/1     Running            1 (32h ago)   4d8h
+mssql-depl-856b8c48fd-l2p6h       0/1     CrashLoopBackOff   3 (30s ago)   6m21s
+platforms-depl-5b69dbc478-s7scc   1/1     Running            1 (32h ago)   4d8h
+
+kubectl get pods
+NAME                              READY   STATUS    RESTARTS      AGE
+commands-depl-7b9447fbb8-kdvtb    1/1     Running   1 (32h ago)   4d8h
+mssql-depl-856b8c48fd-l2p6h       0/1     **Error**     4 (59s ago)   6m50s
+platforms-depl-5b69dbc478-s7scc   1/1     Running   1 (32h ago)   4d8h
+
+SQL Server 2019 will run as non-root by default.
+
+This container is running as user root.
+
+Your master database file is owned by root.
+
+To learn more visit https://go.microsoft.com/fwlink/?linkid=2099216.
+
+2022-02-11 08:15:13.16 Server      The licensing PID was successfully processed. The new edition is [Express Edition].
+
+2022-02-11 08:15:13.55 Server      Microsoft SQL Server 2017 (RTM-CU28) (KB5008084) - 14.0.3430.2 (X64) 
+
+Dec 17 2021 14:30:27 
+
+Copyright (C) 2017 Microsoft Corporation
+
+Express Edition (64-bit) on Linux (Ubuntu 16.04.7 LTS)
+
+2022-02-11 08:15:13.56 Server      UTC adjustment: 0:00
+
+2022-02-11 08:15:13.56 Server      (c) Microsoft Corporation.
+
+2022-02-11 08:15:13.56 Server      All rights reserved.
+
+2022-02-11 08:15:13.56 Server      Server process ID is 384.
+
+2022-02-11 08:15:13.57 Server      Logging SQL Server messages in file '/var/opt/mssql/log/errorlog'.
+
+2022-02-11 08:15:13.57 Server      Registry startup parameters: 
+
+ -d /var/opt/mssql/data/master.mdf
+
+ -l /var/opt/mssql/data/mastlog.ldf
+
+ -e /var/opt/mssql/log/errorlog
+
+2022-02-11 08:15:13.58 Server      SQL Server detected 1 sockets with 4 cores per socket and 4 logical processors per socket, 4 total logical processors; using 4 logical processors based on SQL Server licensing. This is an informational message; no user action is required.
+
+2022-02-11 08:15:13.58 Server      SQL Server is starting at normal priority base (=7). This is an informational message only. No user action is required.
+
+2022-02-11 08:15:13.59 Server      Detected 9550 MB of RAM. This is an informational message; no user action is required.
+
+2022-02-11 08:15:13.59 Server      Using conventional memory in the memory manager.
+
+2022-02-11 08:15:13.60 Server      Page exclusion bitmap is enabled.
+
+2022-02-11 08:15:13.72 Server      Buffer pool extension is already disabled. No action is necessary. 
+
+2022-02-11 08:15:13.93 Server      InitializeExternalUserGroupSid failed. Implied authentication will be disabled.
+
+2022-02-11 08:15:13.93 Server      Implied authentication manager initialization failed. Implied authentication will be disabled.
+
+2022-02-11 08:15:13.94 Server      Successfully initialized the TLS configuration. Allowed TLS protocol versions are ['1.0 1.1 1.2']. Allowed TLS ciphers are ['...'].
+
+2022-02-11 08:15:13.97 Server      Query Store settings initialized with enabled = 1, 
+
+2022-02-11 08:15:13.99 Server      The maximum number of dedicated administrator connections for this instance is '1'
+
+2022-02-11 08:15:14.00 Server      Node configuration: node 0: CPU mask: 0x000000000000000f:0 Active CPU mask: 0x000000000000000f:0. This message provides a description of the NUMA configuration for this computer. This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.03 Server      Using dynamic lock allocation.  Initial allocation of 2500 Lock blocks and 5000 Lock Owner blocks per node.  This is an informational message only.  No user action is required.
+
+2022-02-11 08:15:14.04 Server      In-Memory OLTP initialized on lowend machine.
+
+2022-02-11 08:15:14.07 Server      Database Instant File Initialization: enabled. For security and performance considerations see the topic 'Database Instant File Initialization' in SQL Server Books Online. This is an informational message only. No user action is required.
+
+ForceFlush is enabled for this instance. 
+
+2022-02-11 08:15:14.09 Server      Software Usage Metrics is disabled.
+
+2022-02-11 08:15:14.10 spid5s      Starting up database 'master'.
+
+ForceFlush feature is enabled for log durability.
+
+2022-02-11 08:15:14.10 spid5s      3 transactions rolled forward in database 'master' (1:0). This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.11 spid5s      0 transactions rolled back in database 'master' (1:0). This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.11 spid5s      Recovery is writing a checkpoint in database 'master' (1). This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.26 spid5s      Service Master Key could not be decrypted using one of its encryptions. See sys.key_encryptions for details.
+
+2022-02-11 08:15:14.26 spid5s      An error occurred during Service Master Key initialization. SQLErrorCode=33095, State=8, LastOsError=0.
+
+2022-02-11 08:15:14.34 spid5s      SQL Server Audit is starting the audits. This is an informational message. No user action is required.
+
+2022-02-11 08:15:14.35 spid5s      SQL Server Audit has started the audits. This is an informational message. No user action is required.
+
+2022-02-11 08:15:14.39 spid5s      SQL Trace ID 1 was started by login "sa".
+
+2022-02-11 08:15:14.42 spid5s      Server name is 'mssql-depl-856b'. This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.44 spid19s     Always On: The availability replica manager is starting. This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.45 spid11s     Starting up database 'mssqlsystemresource'.
+
+2022-02-11 08:15:14.45 spid19s     Always On: The availability replica manager is waiting for the instance of SQL Server to allow client connections. This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.46 spid11s     The resource database build version is 14.00.3430. This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.46 spid5s      Starting up database 'msdb'.
+
+2022-02-11 08:15:14.52 spid11s     Starting up database 'model'.
+
+2022-02-11 08:15:14.54 spid18s     A self-generated certificate was successfully loaded for encryption.
+
+2022-02-11 08:15:14.56 spid18s     Server is listening on [ 'any' <ipv6> 1433].
+
+2022-02-11 08:15:14.56 spid18s     Server is listening on [ 'any' <ipv4> 1433].
+
+2022-02-11 08:15:14.56 spid18s     Dedicated administrator connection support was not started because it is disabled on this edition of SQL Server. If you want to use a dedicated administrator connection, restart SQL Server using the trace flag 7806. This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.57 spid5s      1 transactions rolled forward in database 'msdb' (4:0). This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.58 spid18s     SQL Server is now ready for client connections. This is an informational message; no user action is required.
+
+2022-02-11 08:15:14.60 spid5s      0 transactions rolled back in database 'msdb' (4:0). This is an informational message only. No user action is required.
+
+2022-02-11 08:15:14.64 spid11s     Polybase feature disabled.
+
+2022-02-11 08:15:14.64 spid11s     Clearing tempdb database.
+
+2022-02-11 08:15:14.78 spid11s     Starting up database 'tempdb'.
+
+2022-02-11 08:15:14.98 spid19s     The Service Broker endpoint is in disabled or stopped state.
+
+2022-02-11 08:15:14.99 spid19s     The Database Mirroring endpoint is in disabled or stopped state.
+
+2022-02-11 08:15:15.01 spid19s     Service Broker manager has started.
+
+2022-02-11 08:15:15.01 spid5s      Recovery is complete. This is an informational message only. No user action is required.
+
+2022-02-11 08:15:15.21 spid31s     ERROR: Unable to set system administrator password: Password validation failed. The password does not meet SQL Server password policy requirements because it is too short. The password must be at least 8 characters..
+
+2022-02-11 08:15:15.22 spid31s     An error occurred during server setup. See previous errors for more information.
+
+2022-02-11 08:15:15.22 spid31s     SQL Trace was stopped due to server shutdown. Trace ID = '1'. This is an informational message only; no user action is required.
+
+
+
+### kubectl describe pod mssql-depl-856b8c48fd-l2p6h
+Name:         mssql-depl-856b8c48fd-l2p6h
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.4
+Start Time:   Fri, 11 Feb 2022 10:08:26 +0200
+Labels:       app=mssql
+              pod-template-hash=856b8c48fd
+Annotations:  <none>
+Status:       Running
+IP:           10.1.0.26
+IPs:
+  IP:           10.1.0.26
+Controlled By:  ReplicaSet/mssql-depl-856b8c48fd
+Containers:
+  mssql:
+    Container ID:   docker://4a4500f8b67e072f531ae5a0549c68b20ac5547e83fe62f9e8294064f70459bf
+    Image:          mcr.microsoft.com/mssql/server:2017-latest
+    Image ID:       docker-pullable://mcr.microsoft.com/mssql/server@sha256:71960de0371008d7994df5da6d0b33d45bcc2264d67d6a5d9e8573caf18216eb
+    Port:           1433/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Fri, 11 Feb 2022 10:24:48 +0200
+      Finished:     Fri, 11 Feb 2022 10:24:55 +0200
+    Ready:          False
+    Restart Count:  7
+    Environment:
+      MSSQL_PID:    Express
+      ACCEPT_EULA:  Y
+      SA_PASSWORD:  <set to the key 'SA_PASSWORD' in secret 'mssql'>  Optional: false
+    Mounts:
+      /var/opt/mssql/data from mssqldb (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-78qbs (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  mssqldb:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  mssql-claim
+    ReadOnly:   false
+  kube-api-access-78qbs:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Scheduled  20m                   default-scheduler  Successfully assigned default/mssql-depl-856b8c48fd-l2p6h to docker-desktop
+  Normal   Pulling    20m                   kubelet            Pulling image "mcr.microsoft.com/mssql/server:2017-latest"
+  Normal   Pulled     15m                   kubelet            Successfully pulled image "mcr.microsoft.com/mssql/server:2017-latest" in 4m40.784216s
+  Normal   Created    13m (x5 over 15m)     kubelet            Created container mssql
+  Normal   Started    13m (x5 over 15m)     kubelet            Started container mssql
+  Normal   Pulled     13m (x4 over 15m)     kubelet            Container image "mcr.microsoft.com/mssql/server:2017-latest" already present on machine
+  Warning  BackOff    4m53s (x45 over 15m)  kubelet            Back-off restarting failed container
+
+  kubectl get pods
+NAME                              READY   STATUS             RESTARTS        AGE
+commands-depl-7b9447fbb8-kdvtb    1/1     Running            1 (33h ago)     4d8h
+mssql-depl-856b8c48fd-l2p6h       0/1     CrashLoopBackOff   9 (4m24s ago)   31m
+platforms-depl-5b69dbc478-s7scc   1/1     Running            1 (33h ago)     4d8h
+
+
+2022-02-11 08:40:32.51 spid10s     ERROR: Unable to set system administrator password: Password validation failed. **The password does not meet SQL Server password policy requirements because it is too short.** The password must be at least 8 characters..
+
+
