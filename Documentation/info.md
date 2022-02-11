@@ -957,3 +957,26 @@ platforms-depl-5b69dbc478-s7scc   1/1     Running            1 (33h ago)     4d8
 2022-02-11 08:40:32.51 spid10s     ERROR: Unable to set system administrator password: Password validation failed. **The password does not meet SQL Server password policy requirements because it is too short.** The password must be at least 8 characters..
 
 
+kubectl get secrets
+NAME                  TYPE                                  DATA   AGE 
+default-token-w69br   kubernetes.io/service-account-token   3      11d 
+mssql                 Opaque                                1      174m
+
+kubectl edit secret mssql
+kubectl delete secret mssql
+
+kubectl create secret generic mssql --from-literal=SA_PASSWORD="!"
+
+
+kubectl delete secret mssql
+secret "mssql" deleted
+
+kubectl create secret generic mssql --from-literal=SA_PASSWORD="1!"
+secret/mssql created
+
+kubectl get pods
+NAME                              READY   STATUS    RESTARTS      AGE
+commands-depl-7b9447fbb8-kdvtb    1/1     Running   1 (34h ago)   4d9h
+mssql-depl-856b8c48fd-l2p6h       1/1     **Running**   23            95m
+platforms-depl-5b69dbc478-s7scc   1/1     Running   1 (34h ago)   4d10h
+
