@@ -980,3 +980,35 @@ commands-depl-7b9447fbb8-kdvtb    1/1     Running   1 (34h ago)   4d9h
 mssql-depl-856b8c48fd-l2p6h       1/1     **Running**   23            95m
 platforms-depl-5b69dbc478-s7scc   1/1     Running   1 (34h ago)   4d10h
 
+
+
+dotnet ef migrations add initialmigration
+Could not execute because the specified command or file was not found.
+Possible reasons for this include:
+  * You misspelled a built-in dotnet command.
+  * You intended to execute a .NET program, but dotnet-ef does not exist.
+  * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.
+
+dotnet tool install --global dotnet-ef
+You can invoke the tool using the following command: dotnet-ef
+Tool 'dotnet-ef' (version '6.0.2') was successfully installed.
+
+dotnet ef migrations add initialmigration
+Build started...
+Build failed. Use dotnet build to see the errors.
+
+Fake - trick - hack a little bit to do a migration
+NB! Comment trick
+https://youtu.be/DgVjEo3OGBI?t=20962
+
+
+
+dotnet ef migrations add initialmigration
+
+Build started...
+Build succeeded.
+--> Using SqlServer Db
+--> Command Service endpoint: http://localhost:6000/api/c/platforms/
+Done. To undo this action, use 'ef migrations remove'
+
+Migrations was successfully added
