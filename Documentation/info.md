@@ -1012,3 +1012,103 @@ Build succeeded.
 Done. To undo this action, use 'ef migrations remove'
 
 Migrations was successfully added
+
+
+### Rebuild and re-deploy
+
+#### docker build -t dpoluektov/platformservice .
+
+[+] Building 114.8s (15/15) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                                    0.1s 
+ => => transferring dockerfile: 32B                                                                                                                                                     0.0s 
+ => [internal] load .dockerignore                                                                                                                                                       0.0s 
+ => => transferring context: 2B                                                                                                                                                         0.0s 
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:5.0                                                                                                                    1.2s 
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:5.0                                                                                                                       1.2s 
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:5.0@sha256:1a84ffc93d5523c798709003b82e2bceb93cebede29fca7baa0f4569131ca5bc                                                     41.8s 
+ => => resolve mcr.microsoft.com/dotnet/aspnet:5.0@sha256:1a84ffc93d5523c798709003b82e2bceb93cebede29fca7baa0f4569131ca5bc                                                              0.0s 
+ => => sha256:1a84ffc93d5523c798709003b82e2bceb93cebede29fca7baa0f4569131ca5bc 2.17kB / 2.17kB                                                                                          0.0s 
+ => => sha256:1b7ba605440ba0a6af08ef28a2f21880dbb2eba00c1b492c91dae04b7fadd6c0 1.37kB / 1.37kB                                                                                          0.0s 
+ => => sha256:bbc2e8f37e4dabef0fdc806924cdac4ea32a1ee5382bb6e7e5aec304cb79d943 3.26kB / 3.26kB                                                                                          0.0s 
+ => => sha256:21e1bc814f94da1eca203406382d30fbd728d1166b78eb1fe0ec7a656f20a98e 17.07MB / 17.07MB                                                                                       26.9s 
+ => => sha256:a66d6e2c65058e95b041d887650090152518e48b9d189671c0372d74faf2c8fa 31.77MB / 31.77MB                                                                                       39.5s 
+ => => sha256:1468e0fc777d4f3ab0db057f767dc4cb1e2a3b99c0e50cf387734281c4c72f2d 156B / 156B                                                                                              0.2s 
+ => => sha256:52220ccf12d80755aeb587691202470b4306ce97e8d98b1701131d8036534862 8.65MB / 8.65MB                                                                                          6.5s 
+ => => extracting sha256:21e1bc814f94da1eca203406382d30fbd728d1166b78eb1fe0ec7a656f20a98e                                                                                              86.3s 
+ => => extracting sha256:a66d6e2c65058e95b041d887650090152518e48b9d189671c0372d74faf2c8fa                                                                                              73.8s 
+ => => extracting sha256:1468e0fc777d4f3ab0db057f767dc4cb1e2a3b99c0e50cf387734281c4c72f2d                                                                                              72.4s 
+ => => extracting sha256:52220ccf12d80755aeb587691202470b4306ce97e8d98b1701131d8036534862                                                                                              72.2s 
+ => [build-env 1/6] FROM mcr.microsoft.com/dotnet/sdk:5.0@sha256:c5df98ac266e6cd2b94c3ac4e153d7e43db0a84b833b125cada852ec16edd752                                                      83.5s 
+ => => resolve mcr.microsoft.com/dotnet/sdk:5.0@sha256:c5df98ac266e6cd2b94c3ac4e153d7e43db0a84b833b125cada852ec16edd752                                                                 0.0s 
+ => => sha256:3bf64522be1de706f772ffe2c0f09fbc47d69bd5a9d2bb9583e16770e44feb0a 7.11kB / 7.11kB                                                                                          0.0s 
+ => => sha256:c5df98ac266e6cd2b94c3ac4e153d7e43db0a84b833b125cada852ec16edd752 2.17kB / 2.17kB                                                                                          0.0s 
+ => => sha256:500c6619a77f19fe8f4f28dbb21cae9c0c97ac0d494975560ecb3fbc70f59ab5 2.01kB / 2.01kB                                                                                          0.0s 
+ => => sha256:1468e0fc777d4f3ab0db057f767dc4cb1e2a3b99c0e50cf387734281c4c72f2d 156B / 156B                                                                                              0.3s 
+ => => sha256:a66d6e2c65058e95b041d887650090152518e48b9d189671c0372d74faf2c8fa 31.77MB / 31.77MB                                                                                       39.5s 
+ => => sha256:21e1bc814f94da1eca203406382d30fbd728d1166b78eb1fe0ec7a656f20a98e 17.07MB / 17.07MB                                                                                       27.0s 
+ => => sha256:52220ccf12d80755aeb587691202470b4306ce97e8d98b1701131d8036534862 8.65MB / 8.65MB                                                                                          6.5s 
+ => => sha256:b28ec524fcbb6eca7f39478ccdebb07949ad1b159ea2a538b822e4a4b6d68e6a 27.56MB / 27.56MB                                                                                       22.5s 
+ => => sha256:5f6a224134de6fc1eadc2f2413b70abfc7a91096eb93969e9d7d0a970f88f85d 105.64MB / 105.64MB                                                                                     77.8s 
+ => => sha256:827871fe8cdef2e2c081b1e8890095e998930c4690595a496cdb5385421da351 12.69MB / 12.69MB                                                                                       44.3s 
+ => => extracting sha256:21e1bc814f94da1eca203406382d30fbd728d1166b78eb1fe0ec7a656f20a98e                                                                                               0.8s
+ => => extracting sha256:a66d6e2c65058e95b041d887650090152518e48b9d189671c0372d74faf2c8fa                                                                                               1.4s 
+ => => extracting sha256:1468e0fc777d4f3ab0db057f767dc4cb1e2a3b99c0e50cf387734281c4c72f2d                                                                                               0.0s 
+ => => extracting sha256:52220ccf12d80755aeb587691202470b4306ce97e8d98b1701131d8036534862                                                                                               0.4s 
+ => => extracting sha256:b28ec524fcbb6eca7f39478ccdebb07949ad1b159ea2a538b822e4a4b6d68e6a                                                                                               1.6s 
+ => => extracting sha256:5f6a224134de6fc1eadc2f2413b70abfc7a91096eb93969e9d7d0a970f88f85d                                                                                               4.7s 
+ => => extracting sha256:827871fe8cdef2e2c081b1e8890095e998930c4690595a496cdb5385421da351                                                                                               0.6s 
+ => [internal] load build context                                                                                                                                                       0.2s 
+ => => transferring context: 1.73MB                                                                                                                                                     0.1s 
+ => [stage-1 2/3] WORKDIR /app                                                                                                                                                          0.6s 
+ => [build-env 2/6] WORKDIR /app                                                                                                                                                        1.0s 
+ => [build-env 3/6] COPY *.csproj ./                                                                                                                                                    0.1s 
+ => [build-env 4/6] RUN dotnet restore                                                                                                                                                 23.2s 
+ => [build-env 5/6] COPY . ./                                                                                                                                                           0.3s 
+ => [build-env 6/6] RUN dotnet publish -c Release -o out                                                                                                                                4.7s 
+ => [stage-1 3/3] COPY --from=build-env /app/out .                                                                                                                                      0.3s 
+ => exporting to image                                                                                                                                                                  0.3s 
+ => => exporting layers                                                                                                                                                                 0.2s 
+ => => writing image sha256:c72b19c0d7844a2750a1683e5e42782969cdeca3e08be0962f71c9de5224984f                                                                                            0.0s 
+ => => naming to docker.io/dpoluektov/platformservice                                                                                                                                   0.0s 
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+
+#### docker push dpoluektov/platformservice
+
+Using default tag: latest
+The push refers to repository [docker.io/dpoluektov/platformservice]
+d5c13220badf: Pushed
+e70d982eb423: Pushed
+ac7127334263: Pushed
+f403f6573e99: Pushed
+8d650ca022e2: Pushed
+068c0c45d9f4: Pushed
+f18b02b14138: Layer already exists
+latest: digest: sha256:15f6072ae5e9e0aa9576ac827008209269783e8f8946bbd816cdfa1449b7c4e5 size: 1789
+
+Check it on https://hub.docker.com/
+
+
+kubectl get deployments
+
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+commands-depl    1/1     1            1           5d12h
+mssql-depl       1/1     1            1           27h
+**platforms-depl   1/1     1            1           12d**
+(we did not change yaml so just restart)
+
+kubectl rollout restart deployment platforms-depl
+
+deployment.apps/platforms-depl restarted
+
+kubectl get pods
+
+NAME                              READY   STATUS    RESTARTS        AGE
+commands-depl-7b9447fbb8-kdvtb    1/1     Running   1 (2d12h ago)   5d12h
+mssql-depl-856b8c48fd-l2p6h       1/1     Running   24              27h
+platforms-depl-657fd9b857-bg94x   1/1     Running   0               43s
+
+kill deployment
+https://youtu.be/DgVjEo3OGBI?t=21498
+

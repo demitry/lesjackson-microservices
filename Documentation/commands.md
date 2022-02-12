@@ -78,3 +78,10 @@ docker build -t dpoluektov/commandsservice .
 docker push dpoluektov/commandsservice
 
 docker run -p 8080:80 -d dpoluektov/commandsservice
+
+# re-build and re-deploy
+docker build -t dpoluektov/platformservice .
+docker push dpoluektov/platformservice
+kubectl get deployments
+kubectl rollout restart deployment platforms-depl
+kubectl get pods
