@@ -1,0 +1,14 @@
+# Check out the remote repo
+git clone git://host/path/repo.git
+cd repo
+
+# Clobber the file in your checkout
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch file-to-purge.txt' --prune empty --tag-name-filter cat -- --all
+
+# Make sure you don't accidentally commit the file again
+echo file-to-purge.txt >> .gitignore
+git add .gitignore
+git commit -m "Prevent accidentally committing this again" .gitignore
+
+# Push the edited repo. This will break other people's clones, if any.
+git push origin master --force
