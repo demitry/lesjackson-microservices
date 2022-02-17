@@ -239,6 +239,7 @@ CONTAINER ID   IMAGE                        COMMAND                  CREATED    
        NAMES                                                                                                                   tcp   wonderful
 b766a603c0fd   dpoluektov/platformservice   "dotnet PlatformServ…"   About a minute ago   Up About a minute   0.0.0.0:8080->80//tcp   wonderful_chaplygin
 
+
 # docker stop b766a603c0fd
 
 b766a603c0fd
@@ -1112,3 +1113,4 @@ platforms-depl-657fd9b857-bg94x   1/1     Running   0               43s
 kill deployment
 https://youtu.be/DgVjEo3OGBI?t=21498
 
+dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 5.0.0
