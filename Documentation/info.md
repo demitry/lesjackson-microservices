@@ -1153,3 +1153,39 @@ rabbitmq-depl-76f9ff665c-cdzcl    1/1     Running   0            3m28s
 Goto browser (rabbitmq admin page):
 http://localhost:15672/
 guest/guest
+
+
+dotnet add package RabbitMQ.Client
+  Determining projects to restore...
+  Writing C:\Users\Admin\AppData\Local\Temp\tmp6A24.tmp
+info : Adding PackageReference for package 'RabbitMQ.Client' into project 'D:\src\LesJackson\lesjackson-microservices\PlatformService\PlatformService.csproj'.
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/index.json
+info :   OK https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/index.json 157ms
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/page/1.0.0/4.1.2.json
+info :   OK https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/page/1.0.0/4.1.2.json 135ms
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/page/4.1.3-rc1/6.2.0.json
+info :   OK https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/page/4.1.3-rc1/6.2.0.json 138ms
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/page/6.2.1/6.2.3.json
+info :   OK https://api.nuget.org/v3/registration5-gz-semver2/rabbitmq.client/page/6.2.1/6.2.3.json 139ms
+info : Restoring packages for D:\src\LesJackson\lesjackson-microservices\PlatformService\PlatformService.csproj...
+info :   GET https://api.nuget.org/v3-flatcontainer/rabbitmq.client/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/rabbitmq.client/index.json 145ms
+info :   GET https://api.nuget.org/v3-flatcontainer/rabbitmq.client/6.2.3/rabbitmq.client.6.2.3.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/rabbitmq.client/6.2.3/rabbitmq.client.6.2.3.nupkg 19ms
+info :   GET https://api.nuget.org/v3-flatcontainer/system.memory/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/system.threading.channels/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/system.memory/index.json 141ms
+info :   GET https://api.nuget.org/v3-flatcontainer/system.memory/4.5.4/system.memory.4.5.4.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/system.memory/4.5.4/system.memory.4.5.4.nupkg 21ms
+info :   OK https://api.nuget.org/v3-flatcontainer/system.threading.channels/index.json 198ms
+info :   GET https://api.nuget.org/v3-flatcontainer/system.threading.channels/4.7.1/system.threading.channels.4.7.1.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/system.threading.channels/4.7.1/system.threading.channels.4.7.1.nupkg 23ms
+info : Installed System.Threading.Channels 4.7.1 from https://api.nuget.org/v3/index.json with content hash 6akRtHK/wab3246t4p5v3HQrtQk8LboOt5T4dtpNgsp3zvDeM4/Gx8V12t0h+c/W9/enUrilk8n6EQqdQorZAA==.
+info : Installed System.Memory 4.5.4 from https://api.nuget.org/v3/index.json with content hash 1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==.
+info : Installed RabbitMQ.Client 6.2.3 from https://api.nuget.org/v3/index.json with content hash qogCFK03qrNAKV3b9bfWsyT7bUIjkaTeg8sw+mqV8lTP6qc9VDu9MepW4LNUbQ0L/PTczf2f3CWzE+KIYYqBLA==.
+info : Package 'RabbitMQ.Client' is compatible with all the specified frameworks in project 'D:\src\LesJackson\lesjackson-microservices\PlatformService\PlatformService.csproj'.
+info : PackageReference for package 'RabbitMQ.Client' version '6.2.3' added to file 'D:\src\LesJackson\lesjackson-microservices\PlatformService\PlatformService.csproj'.
+info : Committing restore...
+info : Writing assets file to disk. Path: D:\src\LesJackson\lesjackson-microservices\PlatformService\obj\project.assets.json
+log  : Restored D:\src\LesJackson\lesjackson-microservices\PlatformService\PlatformService.csproj (in 1.74 sec).
+

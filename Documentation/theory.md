@@ -65,3 +65,5 @@ A: **No!**
   * Topic Exchange
   * Header Exchange
 
+Why do we have separate Dto for publish
+

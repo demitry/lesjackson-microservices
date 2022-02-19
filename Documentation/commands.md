@@ -85,3 +85,15 @@ docker push dpoluektov/platformservice
 kubectl get deployments
 kubectl rollout restart deployment platforms-depl
 kubectl get pods
+
+kubectl apply -f rabbitmq-depl.yaml
+kubectl get services
+kubectl get deployments
+kubectl get pods
+
+Goto browser (rabbitmq admin page):
+http://localhost:15672/
+guest/guest
+
+dotnet add package RabbitMQ.Client
+
