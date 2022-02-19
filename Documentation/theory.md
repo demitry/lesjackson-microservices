@@ -48,3 +48,20 @@ A: **No!**
     - the requestor still has to wait
     - the call is synchronous
 
+## RabbitMQ
+### RabbitMQ message broker
+* Accepts and forwards messages
+* Messages are sent by Producers (or Publishers)
+* Messages are received by Consumers (or Subscribers)
+* Messages are stored in Queues (essentially a message buffer)
+* Messages could be persisted
+* Exchanges can be used to add "routing" functionality
+* Uses Advanced Message Queuing Protocol (AMQP) and others
+  
+####  Exchanges
+* 4 type of Exchange
+  * Direct Exchange
+  * Fanout Exchange
+  * Topic Exchange
+  * Header Exchange
+

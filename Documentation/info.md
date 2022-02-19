@@ -1114,3 +1114,42 @@ kill deployment
 https://youtu.be/DgVjEo3OGBI?t=21498
 
 dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 5.0.0
+
+kubectl apply -f rabbitmq-depl.yaml
+service/rabbitmq-clusterip-srv created
+service/rabbitmq-loadbalancer created
+error: unable to recognize "rabbitmq-depl.yaml": no matches for kind "Deploy**mn**et" in version "apps/v1"
+
+kubectl apply -f rabbitmq-depl.yaml
+deployment.apps/rabbitmq-depl created
+service/rabbitmq-clusterip-srv unchanged
+service/rabbitmq-loadbalancer unchanged
+
+kubectl get services
+NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                          AGE
+commands-clusterip-srv    ClusterIP      10.108.158.183   <none>        80/TCP                           12d       
+kubernetes                ClusterIP      10.96.0.1        <none>        443/TCP                          19d       
+mssql-clusterip-srv       ClusterIP      10.104.32.199    <none>        1433/TCP                         8d        
+mssql-loadbalancer        LoadBalancer   10.111.112.111   localhost     1433:30457/TCP                   8d        
+platforms-clusterip-srv   ClusterIP      10.98.191.115    <none>        80/TCP                           12d       
+platformservice-srv       NodePort       10.100.201.25    <none>        80:31449/TCP                     18d
+rabbitmq-clusterip-srv    ClusterIP      10.105.8.211     <none>        15672/TCP,5672/TCP               5m49s     
+rabbitmq-loadbalancer     LoadBalancer   10.104.30.111    localhost     15672:32323/TCP,5672:31116/TCP   5m49s   
+
+kubectl get deployments
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+commands-depl    1/1     1            1           12d
+mssql-depl       1/1     1            1           8d
+platforms-depl   1/1     1            1           19d
+rabbitmq-depl    1/1     1            1           2m56s
+
+kubectl get pods       
+NAME                              READY   STATUS    RESTARTS     AGE
+commands-depl-7b9447fbb8-kdvtb    1/1     Running   1 (9d ago)   12d
+mssql-depl-856b8c48fd-l2p6h       1/1     Running   24           8d
+platforms-depl-657fd9b857-bg94x   1/1     Running   0            6d20h
+rabbitmq-depl-76f9ff665c-cdzcl    1/1     Running   0            3m28s
+
+Goto browser (rabbitmq admin page):
+http://localhost:15672/
+guest/guest
