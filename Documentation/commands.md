@@ -97,3 +97,5 @@ guest/guest
 
 dotnet add package RabbitMQ.Client
 
+dotnet add package RabbitMQ.Client
+
