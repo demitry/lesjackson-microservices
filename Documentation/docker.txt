@@ -1,0 +1,20 @@
+docker version – Echoes Client’s and Server’s Version of Docker
+docker images – List all Docker images
+docker build <image> – Builds an image form a Docker file
+docker save <path> <image> – Saves Docker image to .tar file specified by path
+docker run – Runs a command in a new container.
+docker start – Starts one or more stopped containers
+docker stop <container_id> – Stops container
+docker rmi <image> – Removes Docker image
+docker rm <container_id> – Removes Container
+docker pull – Pulls an image or a repository from a registry
+docker push – Pushes an image or a repository to a registry
+docker export – Exports a container’s filesystem as a tar archive
+docker exec – Runs a command in a run-time container
+docker ps – Show running containers
+docker ps -a – Show all containers
+docker ps -l – Show latest created container
+docker search – Searches the Docker Hub for images
+docker search – Searches the Docker Hub for images
+docker attach – Attaches to a running container
+docker commit – Creates a new image from a container’s changes
